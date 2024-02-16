@@ -28,6 +28,11 @@ function updateOperator() {
         operator = this.id;
         operatorSymbol = this.textContent;
         updateDisplay();
+    } else if (num1 && num2 && operator) {
+        calculate();
+        operator = this.id;
+        operatorSymbol = this.textContent;
+        updateDisplay();
     }
 }
 
@@ -46,7 +51,7 @@ function calculate() {
         num2 = parseInt(num2);
         const result = operate(num1, num2, operator);
         allClear();
-        num1 = result;
+        num1 = result.toString();
         updateDisplay();
     }
 }
