@@ -1,15 +1,55 @@
-//Display-related variables and functions
-let num1;
-let num2;
-let operator;
+//Display-related variables
+let num1 = "";
+let num2 = "";
+let operator = "";
+let operatorSymbol = "";
 
 let displayValue = "";
 
+//Display-related functions
+
 function updateDisplay() {
-    displayValue += this.textContent;
+    displayValue = num1 + operatorSymbol + num2;
     display.textContent = displayValue;
 }
 
+function updateNumbers() {
+    if (operator) {
+        num2 += this.textContent
+    } else {
+        num1 += this.textContent;
+    }
+    updateDisplay();
+}
+
+
+function updateOperator() {
+    if (num1 && ! num2) {
+        operator = this.id;
+        operatorSymbol = this.textContent;
+        updateDisplay();
+    }
+}
+
+function allClear() {
+    num1 = "";
+    num2 = "";
+    operator = "";
+    operatorSymbol = "";
+    displayValue = "";
+    updateDisplay();
+}
+
+function calculate() {
+    if (num1 && num2 && operator) {
+        num1 = parseInt(num1);
+        num2 = parseInt(num2);
+        const result = operate(num1, num2, operator);
+        allClear();
+        num1 = result;
+        updateDisplay();
+    }
+}
 
 //Calculation functions
 const add = (a, b) => a + b;
@@ -47,10 +87,13 @@ const decimalButton = document.querySelector("#decimal");
 //Event listeners
 
 for (i = 0; i < digitsButtons.length; i++) {
-    digitsButtons[i].addEventListener("click", updateDisplay);
+    digitsButtons[i].addEventListener("click", updateNumbers);
 }
 
-timesButton.addEventListener("click", setSign);
-divideButton.addEventListener("click", setSign);
-minusButton.addEventListener("click", setSign);
-plusButton.addEventListener("click", setSign);
+timesButton.addEventListener("click", updateOperator);
+divideButton.addEventListener("click", updateOperator);
+minusButton.addEventListener("click", updateOperator);
+plusButton.addEventListener("click", updateOperator);
+
+clearButton.addEventListener("click", allClear);
+equalsButton.addEventListener("click", calculate);
