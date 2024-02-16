@@ -25,7 +25,7 @@ let operator;
 
 let displayValue = "";
 
-function logValue() {
+function updateDisplay() {
     displayValue += this.textContent;
     display.textContent = displayValue;
 }
@@ -46,5 +46,6 @@ const decimalButton = document.querySelector("#decimal");
 //Event listeners
 
 for (i = 0; i < digitsButtons.length; i++) {
-    digitsButtons[i].addEventListener("click", logValue);
+    digitsButtons[i].addEventListener("click", updateDisplay);
 }
+
