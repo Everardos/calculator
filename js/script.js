@@ -18,12 +18,18 @@ function operate(num1, num2, operator) {
     }
 }
 
-//Display-related variables
+//Display-related variables and functions
 let num1;
 let num2;
 let operator;
 
 let displayValue = "";
+
+function logValue() {
+    displayValue += this.textContent;
+    display.textContent = displayValue;
+}
+
 
 //Element selectors
 const digitsButtons = document.querySelectorAll(".digit");
@@ -38,10 +44,6 @@ const backspaceButton = document.querySelector("#backspace");
 const decimalButton = document.querySelector("#decimal");
 
 //Event listeners
-function logValue() {
-    displayValue += this.textContent;
-    display.textContent = displayValue;
-}
 
 for (i = 0; i < digitsButtons.length; i++) {
     digitsButtons[i].addEventListener("click", logValue);
