@@ -3,6 +3,7 @@ let num1 = "";
 let num2 = "";
 let operator = "";
 let operatorSymbol = "";
+let num1Done = false;
 
 let displayValue = "";
 
@@ -23,8 +24,11 @@ function checkNumbers() {
 }
 
 function updateNumbers() {
-    if (operator) {
+    if (num1Done && operator) {
         num2 += this.textContent;
+    } else if (num1Done && ! operator) {
+        num1 = this.textContent
+        num1Done = false;
     } else {
         num1 += this.textContent;
     }
@@ -39,11 +43,13 @@ function updateOperator() {
     if (num1 && ! num2) {
         operator = this.id;
         operatorSymbol = this.textContent;
+        num1Done = true;
         updateDisplay();
     } else if (num1 && num2 && operator) {
         calculate();
         operator = this.id;
         operatorSymbol = this.textContent;
+        num1Done = true;
         updateDisplay();
     }
 }
@@ -54,6 +60,7 @@ function allClear() {
     operator = "";
     operatorSymbol = "";
     displayValue = "";
+    num1Done = false;
     updateDisplay();
 }
 
@@ -64,6 +71,7 @@ function calculate() {
         const result = operate(num1, num2, operator);
         allClear();
         num1 = result.toString();
+        num1Done = true;
         updateDisplay();
     }
 }
