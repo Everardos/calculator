@@ -13,12 +13,24 @@ function updateDisplay() {
     display.textContent = displayValue;
 }
 
+function checkNumbers() {
+    if (num1) {
+        num1 = parseFloat(num1).toString();
+    }
+    if (num2) {
+        num2 = parseFloat(num2).toString();
+    }
+}
+
 function updateNumbers() {
     if (operator) {
-        num2 += this.textContent
+        num2 += this.textContent;
     } else {
         num1 += this.textContent;
     }
+
+    checkNumbers();
+
     updateDisplay();
 }
 
