@@ -15,11 +15,11 @@ function updateDisplay() {
 }
 
 function checkNumbers() {
-    if (num1) {
-        num1 = parseFloat(num1).toString();
+    if (num1 === "00") {
+        num1 = "0";
     }
-    if (num2) {
-        num2 = parseFloat(num2).toString();
+    if (num2 === "00") {
+        num2 = "0";
     }
 }
 
@@ -56,7 +56,7 @@ function updateOperator() {
 
 function updateDecimal() {
     function verifyNoDecimal(number) {
-        if (number && (parseFloat(number) === parseInt(number))) {
+        if (number && ! number.includes(".")) {
             return true;
         } else return false;
     } 
@@ -65,6 +65,10 @@ function updateDecimal() {
         num2 += ".";
     } else if (!num1Done && verifyNoDecimal(num1)) {
         num1 += ".";
+    } else if (num1Done && operator && ! num2) {
+        num2 += "0.";
+    } else if (!num1Done && !num1) {
+        num1 += "0.";
     }
 
     updateDisplay()
@@ -81,6 +85,10 @@ function allClear() {
 }
 
 function calculate() {
+    if (parseFloat(num2) === 0 && operator === "divide") {
+        allClear()
+        display.textContent = "No. Try Again";
+    }
     if (num1 && num2 && operator) {
         num1 = parseFloat(num1);
         num2 = parseFloat(num2);
@@ -100,11 +108,7 @@ function strip(number) {
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
-const divide = (a, b) => {
-    if (b === 0) {
-        return "No. Try harder."
-    } else return a / b;
-}
+const divide = (a, b) =>  a / b;
 
 
 function operate(num1, num2, operator) {
