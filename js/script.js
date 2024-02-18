@@ -84,6 +84,19 @@ function allClear() {
     updateDisplay();
 }
 
+function backspace() {
+    if (num2) {
+        num2 = num2.slice(0, -1);
+    } else if (operator) {
+        operator = "";
+        operatorSymbol = "";
+        num1Done = false;
+    } else if (num1) {
+        num1 = num1.slice(0, -1);
+    }
+    updateDisplay()
+}
+
 function calculate() {
     if (parseFloat(num2) === 0 && operator === "divide") {
         allClear()
@@ -148,6 +161,7 @@ divideButton.addEventListener("click", updateOperator);
 minusButton.addEventListener("click", updateOperator);
 plusButton.addEventListener("click", updateOperator);
 decimalButton.addEventListener("click", updateDecimal);
+backspaceButton.addEventListener("click", backspace);
 
 clearButton.addEventListener("click", allClear);
 equalsButton.addEventListener("click", calculate);
