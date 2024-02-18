@@ -101,8 +101,7 @@ function calculate() {
     if (parseFloat(num2) === 0 && operator === "divide") {
         allClear()
         display.textContent = "No. Try Again";
-    }
-    if (num1 && num2 && operator) {
+    } else if (num1 && num2 && operator) {
         num1 = parseFloat(num1);
         num2 = parseFloat(num2);
         const result = operate(num1, num2, operator);
