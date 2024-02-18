@@ -55,17 +55,19 @@ function updateOperator() {
 }
 
 function updateDecimal() {
-    function checkForDecimal(number) {
+    function verifyNoDecimal(number) {
         if (number && (parseFloat(number) === parseInt(number))) {
-            return false;
-        } else return true;
+            return true;
+        } else return false;
     } 
     
-    if (num1Done && ! checkForDecimal(num2)) {
+    if (num1Done && verifyNoDecimal(num2)) {
         num2 += ".";
-    } else if (!num1Done && ! checkForDecimal(num1)) {
+    } else if (!num1Done && verifyNoDecimal(num1)) {
         num1 += ".";
     }
+
+    updateDisplay()
 }
 
 function allClear() {
@@ -84,10 +86,14 @@ function calculate() {
         num2 = parseFloat(num2);
         const result = operate(num1, num2, operator);
         allClear();
-        num1 = result.toString();
+        num1 = strip(result);
         num1Done = true;
         updateDisplay();
     }
+}
+
+function strip(number) {
+    return parseFloat(number.toPrecision(12)).toString();
 }
 
 //Calculation functions
