@@ -54,6 +54,20 @@ function updateOperator() {
     }
 }
 
+function updateDecimal() {
+    function checkForDecimal(number) {
+        if (number && (parseFloat(number) === parseInt(number))) {
+            return false;
+        } else return true;
+    } 
+    
+    if (num1Done && ! checkForDecimal(num2)) {
+        num2 += ".";
+    } else if (!num1Done && ! checkForDecimal(num1)) {
+        num1 += ".";
+    }
+}
+
 function allClear() {
     num1 = "";
     num2 = "";
@@ -66,8 +80,8 @@ function allClear() {
 
 function calculate() {
     if (num1 && num2 && operator) {
-        num1 = parseInt(num1);
-        num2 = parseInt(num2);
+        num1 = parseFloat(num1);
+        num2 = parseFloat(num2);
         const result = operate(num1, num2, operator);
         allClear();
         num1 = result.toString();
@@ -123,6 +137,7 @@ timesButton.addEventListener("click", updateOperator);
 divideButton.addEventListener("click", updateOperator);
 minusButton.addEventListener("click", updateOperator);
 plusButton.addEventListener("click", updateOperator);
+decimalButton.addEventListener("click", updateDecimal);
 
 clearButton.addEventListener("click", allClear);
 equalsButton.addEventListener("click", calculate);
